@@ -6,7 +6,7 @@ This portfolio brings together three academic projects involving forecasting, da
 
 | Project | Business question | Methods and tools | Files |
 | --- | --- | --- | --- |
-| [Sunoco Gas Demand Forecasting](sunoco-gas-demand-forecasting/) | How can weekly U.S. gasoline demand be forecast for inventory and supply planning? | Excel, seasonal indices, regression, ARIMAX | Two workbooks and a methodology summary |
+| [Sunoco Gas Demand Forecasting](sunoco-gas-demand-forecasting/) | How can weekly U.S. gasoline demand be forecast for inventory and supply planning? | Python, Excel, seasonal indices, regression, ARIMAX | Three selected notebooks, five workbooks, and a methodology summary |
 | [Trinity Admissions Modeling](trinity-admissions-modeling/) | Which admitted students are likely to accept their offers? | Python, pandas, decision trees, random forests | Training preparation, test preparation, and modeling notebooks |
 | [Housing Price Prediction](housing-price-prediction/) | How do property characteristics relate to residential sale prices? | Python, pandas, seaborn, linear regression, residual diagnostics | Analysis notebook and housing training data |
 

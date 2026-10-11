@@ -1,42 +1,67 @@
 # Sunoco Gas Demand Forecasting
 
-**Author:** Harshini Chinta  
-**Type:** Academic forecasting project; no claim of employment or commissioned work for Sunoco  
-**Tools:** Microsoft Excel, regression, seasonal indices, ARIMAX
+An academic forecasting project exploring weekly U.S. gasoline demand for inventory and supply planning.
 
-## Business question
+## Report models and supporting files
 
-How can weekly U.S. gasoline demand be forecast to support inventory planning, supply decisions, and short-term business goals?
+The project report compares a simple time-trend regression, backward-selection regression, multiple regression models, gas-price × vehicle-miles interactions, ARIMAX with four covariates, and a seasonal-index model with vehicle miles and jobless claims.
 
-## Files
+Only three relevant Python notebooks are included. Their model names, predictor sets, and evaluation periods do not always match the report's final specifications, so they are supporting analysis rather than an exact reproduction of every reported result.
 
-| File | Contents |
+| File | Connection to the report |
 | --- | --- |
-| `seasonal_index_model.xlsx` | Trend estimation, weekly seasonal indices, regression with vehicle miles and jobless claims, and a 2025 forecast worksheet |
-| `arimax_training_model.xlsx` | Weekly demand and covariate panel, regression comparisons, an ARIMAX(1,1,1) worksheet, a data dictionary, and reproducibility notes |
+| `Sunoco_Multiple_Regression_NEW.ipynb` | Multiple-regression exploration and diagnostics supporting the report's regression comparisons. Its Models A–F are not the same named models as the report's Models A–B. |
+| `Sunoco_Stepwise_Regression_v2.ipynb` | Forward and backward selection, corresponding to the report's variable-selection approach. The selected predictors may differ from the final report model. |
+| `Sunoco_Interactions_MLR.ipynb` | Interaction screening including gas price × vehicle miles and gas price × jobless claims, with weather predictors when available. |
+| `Sunoco Training_complete_NEW.xlsx` | Shared input workbook read by all three notebooks; contains the `Target` sheet and source documentation. |
+| `Sunoco_Training_Interactions.xlsx` | Workbook with the report's gas × VMT, gas × jobless claims, and holiday × daylight interactions, plus simple regression and earlier model outputs. |
+| `Sunoco_Covariate_Model_VMT_JoblessClaims.xlsx` | Seasonal-index model with vehicle miles and jobless claims; cached 2025 validation MAPE is approximately 2.7468%. |
+| `seasonal_index_model.xlsx` | Simplified seasonal-index workbook, using 2015–2019 and 2022–2024 training data. |
+| `arimax_training_model.xlsx` | Demand/covariate panel, regression comparisons, an ARIMAX worksheet, and source documentation. |
 
-The workbooks are unchanged copies of the uploaded files. The original course report is not published here; the methodology and limitations below summarize it.
+The original report PDF is not included in the public repository. Workbooks are unchanged copies of the supplied files. Notebook code is preserved, with saved outputs and nonessential metadata removed.
 
-## Approach
+## Files intentionally excluded
 
-The report describes screening variables with more than 10% missing values, comparing several regression and time-series approaches, and considering external drivers such as gasoline prices, vehicle miles, jobless claims, weather, daylight, and holiday indicators.
+- `Sunoco_Ridge_Lasso_Model.ipynb`: ridge/lasso/elastic-net comparisons are not part of the report's model table.
+- `Sunoco_Model_C_Refit_2022on.ipynb`: its 2022+ window differs from the restricted regression described in the report (2005–2024).
+- `Sunoco_interactions_regression.ipynb`: an overlapping interaction-analysis alternative; one notebook is sufficient here.
+- `Sunoco_Time_Series_Models.ipynb`: its ARIMAX uses gasoline price and vehicle miles, whereas the report uses gasoline price, jobless claims, cooling degree days, and a holiday indicator. Its additional benchmark models are also not the report's final comparison.
+- `Sunoco_Model_Simplified (2).xlsx`: byte-identical to the simplified workbook already included.
+- Ridge/lasso workbook and unrelated model variants.
 
-The simplified workbook uses training data from 2015–2019 and 2022–2024, excluding 2020–2021. It estimates a trend, calculates weekly seasonal indices, fits a regression to deseasonalized demand, and applies the seasonal indices to forecasts.
+## Run the notebooks
 
-## Results and limitations
+From the repository root:
 
-The report's comparison table records a 2.7468% MAPE for a seasonal-index model with two covariates and a 3.2592% MAPE for an ARIMAX model with four covariates. Its conclusion separately reports 2.167% MAPE for the final model. These values refer to the original report and have not been recomputed here.
+```bash
+python -m venv .venv
+# macOS / Linux
+source .venv/bin/activate
+# Windows PowerShell: .venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+cd sunoco-gas-demand-forecasting
+jupyter lab
+```
 
-The report explicitly states that 2025 data contaminated the seasonal model. These errors must therefore not be presented as an unbiased held-out benchmark. The different MAPE values should be reconciled before quoting one headline result.
+Open any of the three notebooks and run its cells in order. They are independent analyses and all expect `Sunoco Training_complete_NEW.xlsx` in the same directory. The input workbook does not contain the holiday or daylight columns present in the interaction workbook; the interaction notebook detects available predictors and skips unavailable ones. It therefore cannot reproduce the report's full holiday/daylight specification from this input alone.
 
-The resume mentions ridge, lasso, and ARIMAX with two covariates; the supplied report and workbooks describe a different set of model comparisons. This portfolio summarizes the supplied artifacts without inventing missing ridge or lasso implementation files.
+For Excel review, begin with `How It Works` in the simplified workbook, `Model Notes` in the covariate workbook, or `Reproducibility` / `Data Dictionary` in the larger workbooks. The exact Python fitting script for the report's four-covariate ARIMAX is still not supplied; the two-covariate time-series notebook is not a substitute.
 
-## Review locally
+## Report results and limitations
 
-Open the `.xlsx` files in Microsoft Excel. For the simplified model, read the `How It Works` sheet, then review training data, seasonal indices, regression, and forecast sheets in order. For the larger workbook, begin with `Reproducibility`, `Data Dictionary`, and `ARIMAX(1,1,1) Model`.
+| Report result | Evaluation period | Reported value |
+| --- | --- | ---: |
+| Seasonal-index model with two covariates | 2025 validation | MAPE 2.7468% |
+| ARIMAX with four covariates | 2025 validation | MAPE 3.2592% |
+| Selected seasonal-index model | 2026 test period described in the report | MAPE 2.1677%; RMSLE 0.0287; RSE 249.7549 |
 
-The ARIMAX worksheet states that fitted parameter estimates were exported from Python statsmodels. The original fitting script is not included, so the full estimation procedure cannot be reproduced from the uploaded files alone. Excel can display and recalculate the existing workbook formulas.
+These are reported results, not benchmarks recomputed while preparing the repository. The report explicitly acknowledges 2025 contamination of the seasonal model, so the validation score is not a clean out-of-sample estimate. It also reports the separate 2026 test score above.
 
-## Sources and interpretation
+The notebooks use different preprocessing and validation choices: the stepwise notebook carries forward missing forecast inputs, the interaction notebook applies a 95% coverage threshold and uses earlier-year validation, and the regression notebook evaluates several alternative predictor sets. These differ from the report's stated 10% missingness cutoff and its 2025 validation split. Source relevance does not establish numerical agreement with the report.
 
-Source organizations, URLs, coverage, and integration rules are recorded in the larger workbook's `Data Dictionary`. This is an analysis of U.S. gasoline demand in a Sunoco business context; the target should not be described as verified Sunoco company sales. The original report acknowledges extending an instructor's seasonal-model demonstration.
+All code cells passed syntax checks. Notebook execution and model metrics have not been independently verified during this upload.
+
+## Data and attribution
+
+Source organizations, URLs, coverage, and integration rules are recorded in workbook data dictionaries. This is a study of U.S. gasoline demand in a Sunoco business context, not verified Sunoco company sales. The report acknowledges extending an instructor's seasonal-model demonstration.
