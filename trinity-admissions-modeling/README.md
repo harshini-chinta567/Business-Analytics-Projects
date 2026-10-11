@@ -22,6 +22,10 @@ The original preparation notebooks contain instructor guidance and student work;
 - `01_prepare_training.ipynb`
 - `02_prepare_test.ipynb`
 - `03_modeling.ipynb`
+- `Regions.csv`: Reference mapping from states to regions.
+- `Admissions Data_Merit Award Codes.csv`: Generic scholarship-code descriptions; no individual student records.
+
+The reference CSVs document mappings already embedded in the preparation notebooks; the notebooks do not read them directly.
 
 Saved outputs and nonessential notebook metadata have been removed. Student-level records, `TU.csv`, and generated admissions CSVs are excluded.
 
@@ -38,9 +42,9 @@ The random forest's recorded out-of-bag accuracy was 0.830. Its near-perfect tra
 
 ## Run with authorized data
 
-The original `TU.csv` was not supplied with this portfolio, so the admissions workflow cannot be executed from these files alone. Do not substitute the housing `train.csv`.
+The original `TU.csv` is intentionally excluded from this public repository because it contains individual admissions, demographic, and financial-aid records. The admissions workflow cannot be executed from the repository alone. Do not substitute the housing `train.csv`.
 
-Install dependencies using the portfolio's `requirements.txt`, then launch Jupyter from this project directory. Place an authorized `TU.csv` here and run the three notebooks in the listed order. The preparation notebooks write the filenames expected by the modeling notebook. Admissions CSVs are ignored by Git.
+Install dependencies using the portfolio's `requirements.txt`, then launch Jupyter from this project directory. Place an authorized `TU.csv` here and run the three notebooks in the listed order. The preparation notebooks write the filenames expected by the modeling notebook. Raw and generated student-level admissions CSVs are ignored by Git; the two reference CSVs are included.
 
 ## Methodological limitations
 

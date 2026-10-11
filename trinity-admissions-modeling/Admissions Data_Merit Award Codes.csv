@@ -1,0 +1,33 @@
+﻿Merit Award Code,Merit Award,Notes
+I10,"$10,000 International Student Scholarship",
+I12,"$12,000 International Student Scholarship",
+I12.5,"$12,500 International Student Scholarship",
+I15,"$15,000 International Student Scholarship",
+I17,"$17,000 International Student Scholarship",
+I18,"$18,000 International Student Scholarship",
+I19,"$19,000 International Student Scholarship",
+I20,"$20,000 International Student Scholarship",
+I21,"$21,000 International Student Scholarship",
+I24,"$24,000 International Student Scholarship",
+I25,"$25,000 International Student Scholarship",
+I26,"$26,000 International Student Scholarship",
+I27,"$27,000 International Student Scholarship",
+I28,"$28,000 International Student Scholarship",
+I30,"$30,000 International Student Scholarship",
+I32,"$32,000 International Student Scholarship",
+I33,"$33,000 International Student Scholarship",
+I35,"$35,000 International Student Scholarship",
+I38,"$38,000 International Student Scholarship",
+I5,"$5,000 International Student Scholarship",
+I9,"$9,000 International Student Scholarship",
+D12.5,"Dean's $12,500",
+Z0,Domestic No Merit,
+I0,International No Merit,
+M24,"Murchison's $24,000",
+P17,"President's $17,000",
+SEM,Semmes Scholar,Full ride
+TT9,"Trinity Tiger Award $9,000",
+TTS,Trinity Tower Scholar,Full ride
+T21,"Trustee's $21,000",
+X0,Tuition Exchange,"Child of some other university's person entitled to free tuition at their institution, which has an exchange agreement to honor that at TU (example: Rice)"
+Y0,Tuition Remission,"Child of TU faculty or staff do not pay tuition if admitted with sufficient test scores, etc."

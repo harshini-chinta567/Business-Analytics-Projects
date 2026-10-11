@@ -7,4 +7,5 @@ venv/
 .env
 .DS_Store
 # Admissions records and generated data stay local
-trinity-admissions-modeling/*.csv
+trinity-admissions-modeling/TU.csv
+trinity-admissions-modeling/cleaned*.csv
