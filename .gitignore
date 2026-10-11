@@ -1,0 +1,10 @@
+# Python and notebook files
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+.DS_Store
+# Admissions records and generated data stay local
+trinity-admissions-modeling/*.csv
